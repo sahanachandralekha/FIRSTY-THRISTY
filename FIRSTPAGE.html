@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Firsty Thristy</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- Google Fonts: Quicksand -->
+  <link href="https://fonts.googleapis.com/css?family=Quicksand:400,600,700&display=swap" rel="stylesheet" />
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Quicksand', 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #e0c3fc, #8ec5fc 100%);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      color: #392170;
+    }
+    .header {
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      padding: 20px 40px;
+      background: transparent;
+    }
+    .language-select {
+      font-size: 1rem;
+      padding: 6px 12px;
+      border-radius: 20px;
+      border: none;
+      background: #fffdfc;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+      cursor: pointer;
+    }
+    .container, .calculator-container {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      text-align: center;
+      padding: 20px;
+    }
+    .container {
+      min-height: 70vh;
+    }
+    .logo {
+      margin-bottom: 18px;
+      animation: logo-bounce 1.5s infinite alternate;
+      width: 110px;
+      height: 110px;
+      display: inline-block;
+    }
+    @keyframes logo-bounce {
+      0% { transform: translateY(0);}
+      100% { transform: translateY(-10px);}
+    }
+    .headline {
+      font-family: 'Quicksand', 'Segoe UI', sans-serif;
+      font-size: 2.3rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+      letter-spacing: 1px;
+    }
+    .caption {
+      font-family: 'Quicksand', 'Segoe UI', sans-serif;
+      font-size: 1.1rem;
+      font-style: italic;
+      color: #6351a0;
+      margin-bottom: 32px;
+    }
+    .login-buttons {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      margin-bottom: 20px;
+      align-items: center;
+    }
+    .login-btn, .google-btn, .continue-btn {
+      font-family: 'Quicksand', 'Segoe UI', sans-serif;
+      padding: 11px 26px;
+      font-size: 1rem;
+      border-radius: 25px;
+      border: none;
+      box-shadow: 0 2px 8px rgba(72,40,176,0.11);
+      cursor: pointer;
+      background: #fff;
+      font-weight: 600;
+      color: #47229b;
+      transition: background 0.2s;
+      width: 220px;
+    }
+    .login-btn:hover, .google-btn:hover, .continue-btn:hover {
+      background: #ece1fa;
+    }
+    .google-btn {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: #fff;
+      color: #4285f4;
+      border: 1px solid #cfcfcf;
+    }
+    .google-logo {
+      width: 20px;
+      height: 20px;
+      background: url('https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg') no-repeat center/contain;
+      display: inline-block;
+    }
+    .footer {
+      text-align: center;
+      padding: 18px 0;
+      color: #7a6bbc;
+      font-size: 0.98rem;
+      letter-spacing: .7px;
+      background: transparent;
+    }
+    /* Calculator page styles */
+    .calculator-container {
+      background: #fff;
+      border-radius: 8px;
+      max-width: 400px;
+      margin: 20px auto 40px;
+      box-shadow: 0 1px 6px rgba(0,0,0,0.1);
+      flex-grow: 0;
+      padding: 30px 30px 40px;
+      display: none; /* hidden initially */
+      color: #392170;
+    }
+    .calculator-container h2 {
+      margin-bottom: 20px;
+    }
+    label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 600;
+    }
+    input[type="number"] {
+      width: 100%;
+      padding: 10px;
+      font-size: 1rem;
+      border: 1px solid #bbb;
+      border-radius: 6px;
+      margin-bottom: 20px;
+    }
+    button.calc-submit {
+      background-color: #47229b;
+      color: white;
+      border: none;
+      padding: 12px;
+      border-radius: 24px;
+      font-size: 1rem;
+      cursor: pointer;
+      width: 100%;
+      font-weight: 700;
+      transition: background-color 0.3s;
+    }
+    button.calc-submit:hover {
+      background-color: #6847cd;
+    }
+    .result {
+      margin-top: 25px;
+      font-weight: 700;
+      font-size: 1.2rem;
+      color: #6c2bb9;
+    }
+    button.back-home-btn {
+      margin-top: 30px;
+      background-color: #7a68c4;
+      width: 100%;
+      font-size: 1rem;
+      border-radius: 24px;
+      color: white;
+      font-weight: 600;
+      border: none;
+      cursor: pointer;
+      transition: background-color 0.3s;
+      padding: 12px;
+    }
+    button.back-home-btn:hover {
+      background-color: #593ec5;
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <select class="language-select" aria-label="Select Language">
+      <option value="en">English</option>
+      <option value="hi">हिन्दी</option>
+      <option value="es">Español</option>
+    </select>
+  </div>
+
+  <!-- Front page container -->
+  <div class="container" id="frontPage">
+    <div class="logo" aria-label="Firsty Thristy Logo">
+      <!-- SVG: Cute water droplet with thumbs up -->
+      <svg width="110" height="110" viewBox="0 0 110 110" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-hidden="false" aria-describedby="logoDesc">
+        <desc id="logoDesc">Cute blue water droplet with smiling face and thumbs up</desc>
+        <!-- Main droplet -->
+        <ellipse cx="55" cy="63" rx="37" ry="48" fill="#54cafe"/>
+        <!-- Cute face -->
+        <ellipse cx="41" cy="68" rx="6" ry="4" fill="#fff"/>
+        <ellipse cx="69" cy="68" rx="6" ry="4" fill="#fff"/>
+        <ellipse cx="41" cy="68" rx="3" ry="2" fill="#243342"/>
+        <ellipse cx="69" cy="68" rx="3" ry="2" fill="#243342"/>
+        <!-- Smiling mouth -->
+        <path d="M47 81 Q55 87 63 81" stroke="#243342" stroke-width="2.2" fill="none" stroke-linecap="round"/>
+        <!-- Shiny accent left -->
+        <ellipse cx="42" cy="53" rx="5" ry="2" fill="#e0f7ff" opacity="0.7"/>
+        <!-- Thumb (right side) -->
+        <g>
+          <ellipse cx="90" cy="74" rx="5" ry="10" fill="#aef1ff" transform="rotate(-31 90 74)"/>
+          <rect x="88" y="70" width="8" height="18" rx="6" fill="#aef1ff" transform="rotate(-31 90 74)"/>
+          <ellipse cx="92" cy="63" rx="3" ry="4" fill="#8eefff" transform="rotate(-16 92 63)"/>
+        </g>
+      </svg>
+    </div>
+    <div class="headline">Firsty Thristy</div>
+    <div class="caption">Drink For You</div>
+    <div class="login-buttons">
+      <button class="login-btn" type="button">Sign In</button>
+      <button class="login-btn" type="button">Sign Up</button>
+      <button class="google-btn" type="button"><span class="google-logo" aria-hidden="true"></span>Continue with Google</button>
+      <button class="continue-btn" id="continueNowBtn" type="button">Continue for Now</button>
+    </div>
+  </div>
+
+  <!-- Calculator page container -->
+  <div class="calculator-container" id="calculatorPage" aria-hidden="true" style="display:none;">
+    <h2>Water Intake Calculator</h2>
+    <form id="waterCalcForm" novalidate>
+      <label for="weightInput">Enter your weight (kg):</label>
+      <input type="number" id="weightInput" name="weightInput" min="1" required placeholder="e.g., 70" aria-required="true" />
+      <button class="calc-submit" type="submit">Calculate</button>
+    </form>
+    <div class="result" id="calcResult" aria-live="polite"></div>
+    <button class="back-home-btn" id="backHomeBtn" type="button">Back to Home</button>
+  </div>
+
+  <div class="footer">
+    &copy; 2025 Firsty Thristy. Stay hydrated!
+  </div>
+
+  <script>
+    const continueBtn = document.getElementById('continueNowBtn');
+    const backHomeBtn = document.getElementById('backHomeBtn');
+    const frontPage = document.getElementById('frontPage');
+    const calculatorPage = document.getElementById('calculatorPage');
+    const waterCalcForm = document.getElementById('waterCalcForm');
+    const calcResult = document.getElementById('calcResult');
+    const weightInput = document.getElementById('weightInput');
+
+    continueBtn.addEventListener('click', () => {
+      // Hide front page and show calculator page
+      frontPage.style.display = 'none';
+      calculatorPage.style.display = 'flex';
+      calculatorPage.setAttribute('aria-hidden', 'false');
+      weightInput.focus();
+    });
+
+    backHomeBtn.addEventListener('click', () => {
+      // Hide calculator page and show front page
+      calculatorPage.style.display = 'none';
+      calculatorPage.setAttribute('aria-hidden', 'true');
+      frontPage.style.display = 'flex';
+      calcResult.textContent = ''; // clear previous result
+    });
+
+    waterCalcForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const weight = parseFloat(weightInput.value);
+      if (isNaN(weight) || weight <= 0) {
+        alert('Please enter a valid positive weight in kg.');
+        weightInput.focus();
+        return;
+      }
+      const intakeMl = weight * 35;
+      calcResult.textContent = `Recommended daily water intake: ${intakeMl.toFixed(0)} ml (approx.)`;
+    });
+  </script>
+</body>
+</html>
